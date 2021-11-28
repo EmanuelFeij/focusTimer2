@@ -1,19 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Timer from "./components/Timer";
+import Definition from "./components/Definition";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Stack = createNativeStackNavigator();
+
+const INITIAL_TIME = 3600;
 
 export default function App() {
+  const [time, setTime] = useState<number>(INITIAL_TIME);
+
+  const handlerSetTime = (number: number) => setTime(number * 60);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Set Up" screenOptions={{}}>
+        <Stack.Screen name="Set Up">
+          {(props) => <Definition {...props} handlerSetTime={handlerSetTime} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="Timer">
+          {(props) => <Timer {...props} time={time} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
