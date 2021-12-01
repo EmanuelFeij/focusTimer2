@@ -3,9 +3,10 @@ import {
   View,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
   Text,
 } from "react-native";
+import Button from "./Button";
+import Square from "./Square";
 
 const Definition = ({ navigation, handlerSetTime }) => {
   const [time, setTime] = useState<string | undefined>();
@@ -13,40 +14,42 @@ const Definition = ({ navigation, handlerSetTime }) => {
   const myOnPress = () => {
     if (time != "" && time != undefined) {
       handlerSetTime(time);
-      setTime('');
-      navigation.navigate('Timer')
+      setTime("");
+      navigation.navigate("Timer");
     }
   };
 
-  return (
-    <View style={styles.mainContainer}>
-      <TextInput
-        style={styles.textInputStyle}
-        onChangeText={setTime}
-        value={time}
-        placeholder="Number of minutes to set the timer"
-        keyboardType="numeric"
-      />
+  const aboutPress = () => {
+    navigation.navigate("About")
+  }
 
-      <TouchableOpacity onPress={myOnPress} style={styles.button}>
-        <Text style={styles.buttonText}> SET TIME</Text>
-      </TouchableOpacity>
+  return (
+    <View style={styles.container}>
+      <Square>
+        <TextInput
+          style={styles.textInputStyle}
+          onChangeText={setTime}
+          value={time}
+          placeholder="Number of minutes to set the timer"
+          keyboardType="numeric"
+        />
+
+        <Button onPress={myOnPress} width="22%">
+          <Text style={styles.buttonText}>SET TIME</Text>
+        </Button>
+      </Square>
+
+      <Button onPress={aboutPress} width="22%">
+        <Text style={styles.buttonText}>About...</Text>
+      </Button>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-      height: '80%',
-    justifyContent: "space-around",
+  container:{
+    justifyContent: 'space-between',
     alignItems: "center",
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: "cyan",
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: "cyan",
   },
   buttonText: {
     color: "white",

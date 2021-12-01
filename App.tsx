@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Timer from "./components/Timer";
 import Definition from "./components/Definition";
+import About from "./components/About";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -24,16 +25,12 @@ export default function App() {
         <Stack.Screen name="Timer">
           {(props) => <Timer {...props} time={time} />}
         </Stack.Screen>
+        <Stack.Screen name="About">
+          {(props) => <About {...props} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});
